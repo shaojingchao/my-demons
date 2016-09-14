@@ -2,7 +2,7 @@
 
 **Download all resource(with all the sub-request) of a web page.**
 
-**Based on `Electron(chromium + nodejs)`**
+**Based on `Electron(chromium + nodejs).`**
 
 ## To Use
 
