@@ -1,6 +1,6 @@
 # my-demons
 
-**Download all resource of a web page.**
+**Download all resource(with all the sub-request) of a web page.**
 
 ## To Use
 
