@@ -1,6 +1,3 @@
- /*jshint esversion: 6 */
- "use strict";
-
  const {
    app,
    ipcMain,
@@ -9,37 +6,36 @@
  const path = require('path');
  const downloader = require('./app/downloader');
 
- ipcMain.on('download-message', (event, url, dir) => {
-   console.log('------>', url, dir);
-   //  event.sender.send('asynchronous-reply', 'pong');
- });
+ let _mainWindow;
 
- // ipcMain.on('synchronous-message', (event, arg) => {
- //   console.log(arg);
- //   event.returnValue = 'pong';
- // });
+ function startDownload(url, dir) {
 
- let mainWindow;
+   dir = dir || path.resolve(__dirname, 'res');
 
- function startDownload() {
    downloader.download({
-     url: 'https://www.redbet.com/en/casino/game/theme-park',
-     dir: path.resolve(__dirname, 'res'),
+     url: url,
+     dir: dir,
      includes: ['image', 'xhr']
    });
+
  }
+
+ ipcMain.on('download-message', (event, url, dir) => {
+   console.log('starting download......', url, dir);
+   startDownload(url, dir);
+ });
 
  function ready() {
 
-   mainWindow = new BrowserWindow({
+   _mainWindow = new BrowserWindow({
      width: 1024,
      height: 768
    });
 
-   mainWindow.loadURL(`file://${__dirname}/index.html`);
+   _mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-   mainWindow.on('closed', function () {
-     mainWindow = null;
+   _mainWindow.on('closed', function () {
+     _mainWindow = null;
    });
  }
 
@@ -56,7 +52,7 @@
  app.on('activate', function () {
    // On OS X it's common to re-create a window in the app when the
    // dock icon is clicked and there are no other windows open.
-   if (mainWindow === null) {
+   if (_mainWindow === null) {
      ready();
    }
  });

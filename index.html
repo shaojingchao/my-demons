@@ -4,24 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./styles/master.css" media="screen" title="no title">
+  <script src="./render.js" charset="utf-8"></script>
   <title>downloader!</title>
-  <script type="text/javascript">
-    const {
-      ipcRenderer
-    } = require('electron');
-
-    function download() {
-      var url = document.getElementById('url').value;
-      var dir = document.getElementById('dir').value;
-      document.getElementById('result').innerText = 'download' + ","+ url + "," +dir;
-      // document.write('download', url, dir)
-      ipcRenderer.send('download-message', url, dir);
-    };
-
-    // document.querySelector('button').addEventListener('click', function(e) {
-    //   toggle();
-    // });
-  </script>
 </head>
 
 <body>
@@ -41,18 +25,18 @@
   </script>
 
   <div class="">
-    url: <textarea id="url" rows="1" cols="80">url</textarea>
+    url: <textarea id="url" rows="1" cols="80">https://www.redbet.com/en/casino/game/theme-park</textarea>
   </div>
 
   <div class="">
-    dir: <textarea id="dir" rows="1" cols="80">dir</textarea>
+    dir: <textarea id="dir" rows="1" cols="80"></textarea>
   </div>
 
   <div class="">
-    <button type="button" name="button" onclick="download()">Start Download</button>
+    <button type="button" id="download">Start Download</button>
   </div>
 
-  <div class="" id = "result">
+  <div class="" id="result">
   </div>
 
 </body>
