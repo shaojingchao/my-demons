@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./styles/master.css" media="screen" title="no title">
+  <title>downloader!</title>
+  <script type="text/javascript">
+    const {
+      ipcRenderer
+    } = require('electron');
+
+    function download() {
+      var url = document.getElementById('url').value;
+      var dir = document.getElementById('dir').value;
+      document.getElementById('result').innerText = 'download' + ","+ url + "," +dir;
+      // document.write('download', url, dir)
+      ipcRenderer.send('download-message', url, dir);
+    };
+
+    // document.querySelector('button').addEventListener('click', function(e) {
+    //   toggle();
+    // });
+  </script>
+</head>
+
+<body>
+  <h1>Version Informations</h1> Node:
+  <script>
+    document.write(process.versions.node)
+  </script>
+
+  Chrome:
+  <script>
+    document.write(process.versions.chrome)
+  </script>
+
+  Electron:
+  <script>
+    document.write(process.versions.electron)
+  </script>
+
+  <div class="">
+    url: <textarea id="url" rows="1" cols="80">url</textarea>
+  </div>
+
+  <div class="">
+    dir: <textarea id="dir" rows="1" cols="80">dir</textarea>
+  </div>
+
+  <div class="">
+    <button type="button" name="button" onclick="download()">Start Download</button>
+  </div>
+
+  <div class="" id = "result">
+  </div>
+
+</body>
+
+</html>
