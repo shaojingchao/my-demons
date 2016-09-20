@@ -5,6 +5,7 @@
  const url = require('url');
  const fs = require('fs');
  const mkdirp = require('mkdirp');
+ const download = require('download');
 
  let _mainWindow;
  let _counter = 1;
@@ -21,7 +22,7 @@
   * includes & excludes type: 'image','xhr','javascript','css','html'
   */
 
- function download(params) {
+ function start(params) {
 
    params.includes = params.includes || [];
 
@@ -42,15 +43,17 @@
      let parsedUrl = url.parse(newURL);
      let parsedPath = path.parse(parsedUrl.pathname);
 
-     if (params.includes.length !== 0 && !params.includes.includes(resourceType)) {
+     if(params.includes.length !== 0 && !params.includes.includes(resourceType)) {
        return;
      }
 
-     let dir = params.dir + parsedPath.dir;
-     let fullPath = dir + parsedUrl.pathname;
+     let dir = path.join(params.dir, parsedPath.dir);
+     let fullPath = path.join(params.dir, parsedUrl.pathname);
 
-     mkdirp(dir, function (err) {
-       if (err) {
+     console.log(dir, fullPath);
+
+     mkdirp(dir, function(err) {
+       if(err) {
          console.error(err);
        } else {
          console.log('downloading', _counter++, newURL);
@@ -63,11 +66,11 @@
      });
    });
 
-   _mainWindow.on('closed', function () {
+   _mainWindow.on('closed', function() {
      _mainWindow = null;
    });
  }
 
  module.exports = exports = {
-   download: download
+   start: start
  };

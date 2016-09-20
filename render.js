@@ -18,14 +18,12 @@ function showOpenDialog() {
   let selectDir = dialog.showOpenDialog({
     properties: ['openDirectory', 'createDirectory']
   });
-
   selectDir = selectDir || '';
-
   document.getElementById('dir').value = selectDir;
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('dir').value = __dirname;
   document.getElementById('download').addEventListener('click', download);
   document.getElementById('showOpenDialog').addEventListener('click', showOpenDialog);
 }, false);
