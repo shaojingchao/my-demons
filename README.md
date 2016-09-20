@@ -4,6 +4,9 @@
 
 **Based on `Electron(chromium + nodejs).`**
 
+## Screenshot
+![sample](./docs/screenshot.png)
+
 ## Download resources under chrome.devtools.network
 ![sample](./docs/sample.png)
 
