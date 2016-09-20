@@ -7,11 +7,20 @@ const {
   dialog
 } = remote;
 
+const path = require('path');
+const url = require('url');
+
 function download() {
-  let url = document.getElementById('url').value;
+
+  let downloadUrl = document.getElementById('url').value;
   let dir = document.getElementById('dir').value;
-  document.getElementById('result').innerText = 'download' + "," + url + "," + dir;
-  ipcRenderer.send('download-message', url, dir);
+  let parsedUrl = url.parse(downloadUrl);
+
+  dir = dir || __dirname;
+  dir = path.resolve(dir, parsedUrl.host);
+
+  document.getElementById('result').innerText = 'download' + "," + downloadUrl + "," + dir;
+  ipcRenderer.send('download-message', downloadUrl, dir);
 }
 
 function showOpenDialog() {
