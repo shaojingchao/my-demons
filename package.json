@@ -14,7 +14,6 @@
   "dependencies": {
     "download": "^5.0.2",
     "jquery": "^3.1.0",
-    "mkdirp": "^0.5.1",
-    "phantomjs-prebuilt": "^2.1.12"
+    "mkdirp": "^0.5.1"
   }
 }
