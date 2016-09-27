@@ -6,9 +6,7 @@
  const path = require('path');
  const downloader = require('./app/downloader');
 
- let ppapi_flash_path;
- //app.getPath('pepperFlashSystemPlugin')
-
+ let ppapi_flash_path; //app.getPath('pepperFlashSystemPlugin')
  let ppapi_flash_ver;
 
  if (process.platform === 'win32') {
@@ -22,9 +20,7 @@
  }
 
  app.commandLine.appendSwitch('ppapi-flash-path', ppapi_flash_path);
-
- // Optional: Specify flash version, for example, v17.0.0.169
- // app.commandLine.appendSwitch('ppapi-flash-version', ppapi_flash_ver);
+ app.commandLine.appendSwitch('ppapi-flash-version', ppapi_flash_ver);
 
  function startDownload(url, dir) {
 
